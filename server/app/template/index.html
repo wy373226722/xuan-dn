@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>方向选择统计</title>
+    <link rel="stylesheet" href="/assets/css/theme.default.css">
+    <link rel="stylesheet" href="/assets/css/common.css">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+<body>
+<p>执行SQL</p>
+<form action="/" method="post">
+    <label>
+    <textarea name="sql">
+    {{ sql }}
+    </textarea>
+    </label>
+    <input type="submit">
+</form>
+
+<table id="myTable" class="tablesorter">
+    <thead>
+    <tr>
+        {% for a,b in result[0] %}
+        <th>{{ a }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in result %}
+    <tr>
+        {% for a,b in item  %}
+        <td>{{ b }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+<script src="/assets/js/jquery-2.2.3.min.js"></script>
+<script src="/assets/js/jquery.tablesorter.js"></script>
+<script src="/assets/js/jquery.tablesorter.widgets.js"></script>
+<script src="/assets/js/common.js"></script>
+</body>
+</html>
