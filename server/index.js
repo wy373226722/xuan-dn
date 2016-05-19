@@ -51,17 +51,21 @@ router
         });
     })
     .post('/', (ctx) => {
-        return query(ctx.request.body.sql).then((result) => {
-            if (result.length == 0) {
-                ctx.throw(404, '未找该页面或没有任何内容!');
-            } else {
-                result = {
-                    result: result,
-                    sql: ctx.request.body.sql
-                };
-                ctx.render('index', result);
-            }
-        });
+        if(ctx.request.body.sql.toLowerCase().indexOf("delete")){
+            ctx.body = "禁止删除!";
+        }else{
+            return query(ctx.request.body.sql).then((result) => {
+                if (result.length == 0) {
+                    ctx.throw(404, '未找该页面或没有任何内容!');
+                } else {
+                    result = {
+                        result: result,
+                        sql: ctx.request.body.sql
+                    };
+                    ctx.render('index', result);
+                }
+            });
+        }
     });
 
 app
